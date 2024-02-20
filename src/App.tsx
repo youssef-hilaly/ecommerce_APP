@@ -1,25 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import Layout from './Components/Layout/Layout';
+import Home from './Components/Home/Home';
+import Login from './Components/Login/Login';
+import Register from './Components/Register/Register';
+import Cart from './Components/Cart/Cart';
+import ProductDetails from './Components/ProductDetails/ProductDetails';
+import Payment from './Components/Payment/Payment';
+import AuthContextProvider from './Context/AuthContext';
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import CartContextProvider from './Context/CartContext';
+import Orders from './Components/Orders/Orders';
+
+const route = createBrowserRouter([
+  {
+    path: '/', element: <Layout />, children: [
+      { path: '', element: <Home /> },
+      { path: 'home', element: <Home /> },
+      { path: 'productDetails/:id', element: <ProductDetails /> },
+      { path: 'cart', element: <ProtectedRoute><Cart /></ProtectedRoute> },
+      { path: 'payment', element: <ProtectedRoute><Payment /></ProtectedRoute> },
+      { path: 'allorders', element: <ProtectedRoute><Orders /></ProtectedRoute> },
+      { path: 'login', element: <Login /> },
+      { path: 'register', element: <Register /> },
+      { path: '*', element: <div>Not Found</div> }
+    ]
+  },
+]);
 
 function App() {
+  const client = new QueryClient();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <QueryClientProvider client={client}>
+        <AuthContextProvider>
+          <CartContextProvider>
+            <RouterProvider router={route} />
+          </CartContextProvider>
+        </AuthContextProvider>
+      </QueryClientProvider >
+      <Toaster />
+    </>
   );
 }
 

@@ -1,0 +1,15 @@
+footer{
+    background-color: #eee;
+}
+footer .footer-payment{
+    border: solid #888;
+    border-width: 1px 0;
+}
+footer .footer-payment img{
+    height: 20px;
+}
+footer .footer-payment .app-links img{
+    height: 25px;
+    margin-left: 5px;
+}
+
