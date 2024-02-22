@@ -1,0 +1,7 @@
+.toaster-wrapper>div {
+    display: none !important;
+}
+
+.toaster-wrapper>div:nth-child(-n+1) {
+    display: flex !important;
+}
