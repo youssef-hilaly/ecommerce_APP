@@ -17,6 +17,9 @@ import Categories from './Components/Categories/Categories';
 import Brands from './Components/Brands/Brands';
 import WishContextProvider from './Context/WishContext';
 import Wishlist from './Components/WishList/Wishlist';
+import ForgetPassword from './Components/ForgetPassword/Forgetpassword';
+import ResetCode from './Components/ForgetPassword/ResetCode';
+import ResetPassword from './Components/ForgetPassword/ResetPassword';
 
 const route = createBrowserRouter([
   {
@@ -32,6 +35,9 @@ const route = createBrowserRouter([
       {path: 'wishlist', element: <ProtectedRoute><Wishlist/></ProtectedRoute>},
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
+      { path: 'forgetpassword', element: <ForgetPassword/>},
+      { path: 'resetcode', element: <ResetCode/>},
+      { path: 'resetpassword', element: <ResetPassword/>},
       { path: '*', element: <div>Not Found</div> }
     ]
   },
@@ -50,7 +56,7 @@ function App() {
           </WishContextProvider>
         </AuthContextProvider>
       </QueryClientProvider >
-      <Toaster />
+      <Toaster containerClassName='toaster-wrapper' />
     </>
   );
 }
