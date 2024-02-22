@@ -55,7 +55,6 @@ export default function ProductDetails() {
 
   return (
     <div className="container py-5">
-      {/* awesome ui */}
       <div className="row">
         <div className="col-md-4">
           <img style={{ height: "400px" }} src={data?.data.data.imageCover} alt="" />

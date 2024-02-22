@@ -13,16 +13,23 @@ import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import CartContextProvider from './Context/CartContext';
 import Orders from './Components/Orders/Orders';
+import Categories from './Components/Categories/Categories';
+import Brands from './Components/Brands/Brands';
+import WishContextProvider from './Context/WishContext';
+import Wishlist from './Components/WishList/Wishlist';
 
 const route = createBrowserRouter([
   {
     path: '/', element: <Layout />, children: [
       { path: '', element: <Home /> },
       { path: 'home', element: <Home /> },
+      { path: 'categories', element: <Categories /> },
+      { path: 'brands', element: <Brands /> },
       { path: 'productDetails/:id', element: <ProductDetails /> },
       { path: 'cart', element: <ProtectedRoute><Cart /></ProtectedRoute> },
       { path: 'payment', element: <ProtectedRoute><Payment /></ProtectedRoute> },
       { path: 'allorders', element: <ProtectedRoute><Orders /></ProtectedRoute> },
+      {path: 'wishlist', element: <ProtectedRoute><Wishlist/></ProtectedRoute>},
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
       { path: '*', element: <div>Not Found</div> }
@@ -36,9 +43,11 @@ function App() {
     <>
       <QueryClientProvider client={client}>
         <AuthContextProvider>
-          <CartContextProvider>
-            <RouterProvider router={route} />
-          </CartContextProvider>
+          <WishContextProvider>
+            <CartContextProvider>
+              <RouterProvider router={route} />
+            </CartContextProvider>
+          </WishContextProvider>
         </AuthContextProvider>
       </QueryClientProvider >
       <Toaster />

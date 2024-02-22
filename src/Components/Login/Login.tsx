@@ -12,18 +12,34 @@ const validationSchema = Yup.object({
 
 export default function Login() {
 
-  const {setToken} = useContext(authContext);
+  const {setToken, setUserId} = useContext(authContext);
+  
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isButtonSpin, setIsButtonSpin] = useState<boolean>(false);
   const Navigate = useNavigate();
 
+
+  function parseJwt (token: string): any{
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+  }
+
   const sendData = async(values: any) => {
     setIsButtonSpin(true);
     await axios.post('https://ecommerce.routemisr.com/api/v1/auth/signin',values).then((response) => {
-      console.log(response.data);
+      // user token
       setToken(response.data.token);
       localStorage.setItem('token', response.data.token);
+      // user id
+      let id = parseJwt(response.data.token).id;
+      setUserId(id);
+      localStorage.setItem('id',id);
+      // navigate to home
       Navigate('/home')
     }).catch((error) => {
       setErrorMessage(error.response.data.message);
@@ -33,6 +49,7 @@ export default function Login() {
     })
     setIsButtonSpin(false);
   }
+
   return (
       <div className='login text-start py-5' style={{margin: "115px 0px"}}>
         <div className="container">

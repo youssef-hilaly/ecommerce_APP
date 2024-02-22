@@ -2,10 +2,11 @@ import { useContext } from "react"
 import { cartContext } from "../../Context/CartContext"
 import axios from "axios"
 import { useQuery } from "react-query"
-
+import { authContext } from "../../Context/AuthContext"
 
 export default function Orders() {
-    const { userId } = useContext(cartContext)
+
+    const { userId } = useContext(authContext)
 
     const { isError, isLoading, data, isFetched} = useQuery(`getOrders:${userId}`, getOrders)
 
