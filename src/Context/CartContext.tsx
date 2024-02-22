@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { authContext } from "./AuthContext";
-import { get } from "http";
 import axios from "axios";
 
 type cartContextType = {
@@ -13,7 +12,6 @@ type cartContextType = {
     deleteFromCart: (id: string) => Promise<boolean>;
     clearCart: () => Promise<boolean>;
     setEmpty: () => void;
-    userId: string;
 };
 
 export const cartContext = createContext({} as cartContextType);
@@ -24,15 +22,8 @@ export default function CartContextProvider({ children }: { children: React.Reac
     const [totalPrice, setTotalPrice] = useState<Number>(0)
     const [cartItems, setCartItems] = useState<Array<any>>([])
     const [cartID, setCartID] = useState<string>('')
-    const [userId, setUserId] = useState<string>('')
-
-    
 
     const { token } = useContext(authContext)
-
-    if(localStorage.getItem('userId') && userId === ''){
-        setUserId(localStorage.getItem('userId') || '');
-    }
 
     function setEmpty() {
         setTotalItems(0);
@@ -55,12 +46,11 @@ export default function CartContextProvider({ children }: { children: React.Reac
     async function getCart() {
         return await axios.get('https://ecommerce.routemisr.com/api/v1/cart', { headers: { token: token || '' } })
             .then(res => {
+                console.log("cart called");
                 setCartItems(res.data.data.products)
                 setTotalItems(res.data.numOfCartItems)
                 setTotalPrice(res.data.data.totalCartPrice)
                 setCartID(res.data.data._id);
-                setUserId(res.data.data.cartOwner);
-                localStorage.setItem('userId', res.data.data.cartOwner);
                 return true;
             })
             .catch(err => {return false;});
@@ -109,7 +99,7 @@ export default function CartContextProvider({ children }: { children: React.Reac
     }, [token])
 
     return (
-        <cartContext.Provider value={{ totalItems, totalPrice, cartItems, cartID, userId, setEmpty, addToCart, updateItemCount, deleteFromCart, clearCart}}>
+        <cartContext.Provider value={{totalItems, totalPrice, cartItems, cartID, setEmpty, addToCart, updateItemCount, deleteFromCart, clearCart}}>
             {children}
         </cartContext.Provider>
     )

@@ -58,6 +58,11 @@ export default function Navbar() {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link className="nav-link" to="wishlist">
+                  wishList
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link" to="cart">
                   <span className="position-relative">
                     Cart
