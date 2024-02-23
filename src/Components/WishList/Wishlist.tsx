@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
-import { wishContext } from '../../Context/WishContext'
 import toast from 'react-hot-toast'
 import { cartContext } from '../../Context/CartContext'
+import { wishContext } from '../../Context/WishContext'
 
 export default function Wishlist() {
     const { lazy, wishList, getWishList, removeFromWishList } = useContext(wishContext)
@@ -42,39 +42,36 @@ export default function Wishlist() {
     }
 
     return (
-        <div className="container">
-            <div className="row g-3">
-                {wishList.map((product: any) => {
-                    return (
-                        <div className=" col-md-4 col-lg-3 d-flex" key={product.id}>
-                            <div className=" card product bg-black overflow-hidden">
-                                <img src={product.imageCover} className="card-img-top" alt="..." />
-                                <div className="card-body text-white">
-                                    <div className="d-flex justify-content-between">
-                                        <h5 className="card-title text-main">{product.category.name}</h5>
-                                    </div>
-                                    <p className="card-text">{product.title.split(" ").slice(0, 2).join(" ")}</p>
-                                    <div className="d-flex justify-content-between">
-                                        {product.priceAfterDiscount ?
-                                            <div className='d-flex'>
-                                                <p className="card-text text-danger text-decoration-line-through me-2">{product.price}</p>
-                                                <p className="card-text text-white">{product.priceAfterDiscount} EGP</p>
-                                            </div>
-                                            :
-                                            <p className="card-text text-white">{product.price} EGP</p>
-                                        }
-                                        <p className="card-text text-white "><i className="fa fa-star text-warning me-1"></i>{product.ratingsAverage}</p>
-                                    </div>
-                                </div>
-                                <div className="d-flex justify-content-between">
-                                        <button onClick={() => removeProductFromWishList(product.id)} className="btn bg-danger text-white mx-1 w-50">Remove</button>
+        <>
+            <div className="container py-5">
+                <h2>Your WishList</h2>
+                <div className='overflow-x-scroll'>
+                    <table className='table'>
+                        <thead>
+                            <tr className='text-center'>
+                                <th>Images</th>
+                                <th>Product</th>
+                                <th>Unit Price</th>
+                                <th>Add to Cart</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {wishList.map((product: any, index: number) => (
+                                <tr key={index} className='text-center' >
+                                    <td><img src={product.imageCover} alt="" style={{ width: "100px" }} /></td>
+                                    <td>{product.title.split(" ").slice(0, 4).join(" ")}</td>
+                                    <td>{product.price}</td>
+                                    <td>
                                         <button onClick={() => addProductToCart(product.id)} className="btn bg-main text-white mx-1 w-50">Add to cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                })}
+                                    </td>
+                                    <td> <button onClick={() => removeProductFromWishList(product.id)} className="btn bg-danger text-white mx-1 w-50">Remove</button></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        </>
     )
 }

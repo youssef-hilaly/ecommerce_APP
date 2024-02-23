@@ -1,13 +1,12 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { useParams } from "react-router-dom";
 import { Children, cloneElement } from "react";
 
-export default function SimpleSlider({ children, slidesToShow }: any) {
+export default function SimpleSlider({ children, slidesToShow, dots }: any) {
     const arrayChildren = Children.toArray(children);
     var settings = {
-        dots: false,
+        dots: dots,
         infinite: true,
         slidesToShow: slidesToShow,
         slidesToScroll: 1,
@@ -19,7 +18,7 @@ export default function SimpleSlider({ children, slidesToShow }: any) {
     };
     return (
         <Slider {...settings}>
-            {arrayChildren.map((child, index) => <div key={index} className="p-1" >{child}</div>)}
+            {arrayChildren.map((child, index) => <div key={index} >{child}</div>)}
         </Slider>
     );
 }

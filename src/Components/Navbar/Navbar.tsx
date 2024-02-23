@@ -69,7 +69,6 @@ export default function Navbar() {
                     {totalItems? 
                     <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                       {totalItems.toString()}
-                      <span className="visually-hidden">unread messages</span>
                     </span>:<></>}
 
                   </span>

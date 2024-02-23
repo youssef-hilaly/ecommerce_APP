@@ -1,0 +1,28 @@
+.nav-help{
+    border-width: 0px 0px 1px 0px ;
+    border-style: solid ;
+    border-color: #4b41bc ;
+}
+.nav-help select{
+    padding:0 !important;
+    background-color: transparent !important;
+    color: white !important;
+    border: none !important;
+    --bs-form-select-bg-img: url() !important;
+    appearance: auto !important;
+}
+.nav-help select:focus{
+    box-shadow: none ;
+}
+.nav-help select option{
+    color: #000 ;
+    padding: 20px ;
+}
+
+@media screen and (max-width: 350px){
+    .nav-help :where(p, select, option){
+        font-size: small;
+    }
+}
+
+

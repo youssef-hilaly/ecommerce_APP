@@ -1,97 +1,90 @@
 import React, { useContext } from 'react'
-import { cartContext } from '../../Context/CartContext'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { cartContext } from '../../Context/CartContext';
 
 export default function Cart() {
+    const { cartItems, totalItems, totalPrice, deleteFromCart, updateItemCount, clearCart } = useContext(cartContext)
 
-  const { cartItems, totalItems, totalPrice, deleteFromCart, updateItemCount, clearCart } = useContext(cartContext)
+    const navigate = useNavigate();
 
-  const navigate = useNavigate();
+    function Checkout() {
+        navigate('/payment')
+    }
 
-  function Checkout() {
-    navigate('/payment')
-  }
-  
-  async function deleteItem(id: string) {
-    const toastId = toast.loading("Please wait...")
-    const isOk = await deleteFromCart(id);
-    isOk ? toast.success("Product deleted", { id: toastId }) : toast.error("Error deleting product", { id: toastId });
-  }
+    async function deleteItem(id: string) {
+        const toastId = toast.loading("Please wait...")
+        const isOk = await deleteFromCart(id);
+        isOk ? toast.success("Product deleted", { id: toastId }) : toast.error("Error deleting product", { id: toastId });
+    }
 
-  async function updateCount(id: string, count: number) {
-    const toastId = toast.loading("Please wait...")
-    const isOk = await updateItemCount(id, count);
-    isOk ? toast.success("Product count updated", { id: toastId }) : toast.error("Error updating product count", { id: toastId });
-  }
+    async function updateCount(id: string, count: number) {
+        const toastId = toast.loading("Please wait...")
+        const isOk = await updateItemCount(id, count);
+        isOk ? toast.success("Product count updated", { id: toastId }) : toast.error("Error updating product count", { id: toastId });
+    }
 
-  async function _clearCart() {
-    if (cartItems.length === 0) return;
-    const toastId = toast.loading("Please wait...")
-    const isOk = await clearCart();
-    isOk ? toast.success("Cart cleared", { id: toastId }) : toast.error("Error clearing cart", { id: toastId });
-  }
+    async function _clearCart() {
+        if (cartItems.length === 0) return;
+        const toastId = toast.loading("Please wait...")
+        const isOk = await clearCart();
+        isOk ? toast.success("Cart cleared", { id: toastId }) : toast.error("Error clearing cart", { id: toastId });
+    }
 
-  if (cartItems.length === 0) return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
-      <h2>Your cart is empty</h2>
-    </div>
-  )
-
-  return (
-    <>
-      <div className="container py-5">
-        <div className="d-flex justify-content-between border-bottom mb-2 pb-2">
-          <div>
-            <h2>Summary</h2>
-            <p>Total Items: {totalItems.toString()}</p>
-            <p>Total Price: {totalPrice.toString()}</p>
-          </div>
-          <div>
-            <button onClick={Checkout} className="btn btn-primary">Checkout</button>
-          </div>
+    if (cartItems.length === 0) return (
+        <div className="d-flex justify-content-center align-items-center vh-100">
+            <h2>Your cart is empty</h2>
         </div>
-        <div >
-          <div className="d-flex justify-content-between mb-2">
-            <h2>Cart</h2>
-            <button onClick={_clearCart} className="btn btn-danger">ClearCart</button>
-          </div>
-          <div className="d-flex flex-column">
-            {cartItems.map((item: any, index: number) => (
-              <div key={index}>
-                <div className="card mb-2 p-2 bg-dark text-white">
-                  <div className="row">
-                    <div className="col-md-2 col-sm-4">
-                      <div>
-                        <img src={item.product.imageCover} className="w-100" style={{ height: '200px' }} alt="..." />
-                      </div>
-                    </div>
-                    <div className="col-md-7 col-sm-5">
-                      <div className='p-3 d-flex justify-content-around flex-column h-100'>
-                        <h5 className="card-title">{item.product.title}</h5>
-                        <p className="card-text">Price: {item.price}</p>
-                        <p className="card-text">Total: {item.price * item.count}</p>
-                        <button className="btn btn-danger" onClick={() => { deleteItem(item.product._id) }}>Delete</button>
-                      </div>
-                    </div>
-                    <div className="col-sm-3 align-self-center">
-                      <div className='p-3 d-flex justify-content-center'>
-                        {/* +/- buttons  and count*/}
-                        <button className="btn btn-primary" onClick={() => { updateCount(item.product._id, item.count + 1) }}>+</button>
-                        <p className="m-2">{item.count}</p>
-                        <button className="btn btn-primary" onClick={() => {
-                          if (item.count > 1) updateCount(item.product._id, item.count - 1)
-                        }}>-</button>
-                      </div>
-                    </div>
-                  </div>
+    )
+    return (
+        // table
+        // table head: images | product name | price | quantity | total price | remove 
+        <>
+            <div className="container py-5">
+                <div className="d-flex justify-content-between mb-2">
+                    <h2>Your Cart</h2>
+                    <button onClick={Checkout} className="btn btn-primary">Checkout</button>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-    </>
-  )
+                <div className="d-flex justify-content-between my-3">
+                    <h5>Total Items: {totalItems.toString()}</h5>
+                    <h5>Total Price: {totalPrice.toString()}</h5>
+                    <button onClick={_clearCart} className="btn btn-danger">Clear Cart</button>
+                </div>
+                <div className='overflow-x-scroll'>
+                    <table className='table'>
+                        <thead>
+                            <tr className='text-center'>
+                                <th>Images</th>
+                                <th>Product</th>
+                                <th>Unit Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {cartItems.map((item: any, index: number) => (
+                                <tr key={index} className='text-center' >
+                                    <td><img src={item.product.imageCover} alt="" style={{ width: "100px" }} /></td>
+                                    <td>{item.product.title.split(" ").slice(0, 4).join(" ")}</td>
+                                    <td>{item.price}</td>
+                                    <td>
+                                        <div className='d-flex justify-content-between border-1 border'>
+                                            <button className="btn border-0 border-end rounded-0" onClick={() => { updateCount(item.product._id, item.count + 1) }}>+</button>
+                                            <p className="m-2">{item.count}</p>
+                                            <button className="btn border-0 border-start rounded-0" onClick={() => {
+                                                if (item.count > 1) updateCount(item.product._id, item.count - 1)
+                                            }}>-</button>
+                                        </div>
+                                    </td>
+                                    <td>{item.price * item.count}</td>
+                                    <td><button onClick={() => deleteItem(item._id)} className="btn btn-danger">Remove</button></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </>
+    )
 }

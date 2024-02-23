@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import * as Yup from 'yup'
 import { authContext } from '../../Context/AuthContext';
+import toast from 'react-hot-toast';
 
 const validationSchema = Yup.object({
   email: Yup.string().required('Email is required').email('Invalid email'),
@@ -14,8 +15,6 @@ export default function Login() {
 
   const { setToken, setUserId } = useContext(authContext);
 
-
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isButtonSpin, setIsButtonSpin] = useState<boolean>(false);
   const Navigate = useNavigate();
 
@@ -31,7 +30,8 @@ export default function Login() {
 
   const sendData = async (values: any) => {
     setIsButtonSpin(true);
-    await axios.post('https://ecommerce.routemisr.com/api/v1/auth/signin', values).then((response) => {
+    await axios.post('https://ecommerce.routemisr.com/api/v1/auth/signin', values)
+    .then((response) => {
       // user token
       setToken(response.data.token);
       localStorage.setItem('token', response.data.token);
@@ -42,10 +42,15 @@ export default function Login() {
       // navigate to home
       Navigate('/home')
     }).catch((error) => {
-      setErrorMessage(error.response.data.message);
-      setTimeout(() => {
-        setErrorMessage(null);
-      }, 3000);
+      if (error.code === 'ERR_NETWORK') {
+        toast.error("Network Error");
+      }
+      else if (error.code == 'ERR_BAD_REQUEST') {
+        toast.error("Invalid Email or Password");
+      }
+      else {
+        toast.error("Error sending Code");
+      }
     })
     setIsButtonSpin(false);
   }
@@ -53,7 +58,6 @@ export default function Login() {
   return (
     <div className='login text-start py-5' style={{ margin: "115px 0px" }}>
       <div className="container">
-        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
         <h3>Login:</h3>
         <Formik
           initialValues={{
@@ -75,7 +79,7 @@ export default function Login() {
 
             <div className='d-flex flex-row justify-content-between mt-3'>
               <Link to='/forgetpassword'>
-                <p>Forget password</p>
+                <p className='text-primary'>Forget password?</p>
               </Link>
               <button className={`btn bg-main text-white ${isButtonSpin ? 'disabled' : ''}`} type='submit'>
                 {isButtonSpin ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : 'Login'}

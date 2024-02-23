@@ -1,5 +1,5 @@
 import './App.css';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter, createHashRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Layout from './Components/Layout/Layout';
 import Home from './Components/Home/Home';
@@ -16,12 +16,12 @@ import Orders from './Components/Orders/Orders';
 import Categories from './Components/Categories/Categories';
 import Brands from './Components/Brands/Brands';
 import WishContextProvider from './Context/WishContext';
-import Wishlist from './Components/WishList/Wishlist';
 import ForgetPassword from './Components/ForgetPassword/Forgetpassword';
 import ResetCode from './Components/ForgetPassword/ResetCode';
 import ResetPassword from './Components/ForgetPassword/ResetPassword';
+import Wishlist from './Components/WishList/Wishlist';
 
-const route = createBrowserRouter([
+const route = createHashRouter([
   {
     path: '/', element: <Layout />, children: [
       { path: '', element: <Home /> },
@@ -32,12 +32,13 @@ const route = createBrowserRouter([
       { path: 'cart', element: <ProtectedRoute><Cart /></ProtectedRoute> },
       { path: 'payment', element: <ProtectedRoute><Payment /></ProtectedRoute> },
       { path: 'allorders', element: <ProtectedRoute><Orders /></ProtectedRoute> },
-      {path: 'wishlist', element: <ProtectedRoute><Wishlist/></ProtectedRoute>},
+      { path: 'wishlist', element: <ProtectedRoute><Wishlist /></ProtectedRoute> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
-      { path: 'forgetpassword', element: <ForgetPassword/>},
-      { path: 'resetcode', element: <ResetCode/>},
-      { path: 'resetpassword', element: <ResetPassword/>},
+      { path: 'forgetpassword', element: <ForgetPassword /> },
+      { path: 'products', element: <Orders/>},
+      { path: 'resetcode', element: <ResetCode /> },
+      { path: 'resetpassword', element: <ResetPassword /> },
       { path: '*', element: <div>Not Found</div> }
     ]
   },

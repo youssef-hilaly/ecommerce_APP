@@ -1,0 +1,26 @@
+.product {
+    transition: all 1s;
+}
+.product:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 10px 0 var(--main-color);
+    border: solid 1px var(--main-color);
+}
+
+.product .buttons{
+    right: 5px;
+    opacity: 0;
+    transition: all 1s;
+}
+.product:hover .buttons{
+    opacity: 1;
+}
+.product .buttons i.fa-cart-arrow-down:hover{
+    color : #ffc908 !important;
+}
+.product .buttons i.fa-heart.text-danger:hover{
+    color : white !important;
+}
+.product .buttons i.fa-heart.text-white:hover{
+    color : red !important;
+}

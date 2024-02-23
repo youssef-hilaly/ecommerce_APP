@@ -27,10 +27,10 @@ export default function Categories() {
 
     return (
         <div className="container py-5">
-            <div className="row g-2">
+            <div className="row g-3">
                 {data?.data.data.map((category: any) => {
                     return (
-                        <div key={category._id} className="col-md-4">
+                        <div key={category._id} className="col-md-4 col-lg-3 col-sm-6">
                                 <div onClick={handleClick} className="card cursor-pointer" >
                                     <img src={category.image} className="w-100" style={{ height: '300px' }} alt="..." />
                                     <div className="card-body">

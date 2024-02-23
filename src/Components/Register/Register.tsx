@@ -3,6 +3,7 @@ import * as Yup from 'yup'
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const validationSchema = Yup.object({
   name: Yup.string().required('Name is required').min(5, 'Name must be at least 5 characters long')
@@ -16,24 +17,24 @@ const validationSchema = Yup.object({
 });
 export default function Register() : JSX.Element{
 
-  const [created, setCreated] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isButtonSpin, setIsButtonSpin] = useState<boolean>(false);
   const Navigate = useNavigate();
 
   const sendData = async(values: any) => {
     setIsButtonSpin(true);
     await axios.post('https://ecommerce.routemisr.com/api/v1/auth/signup',values).then((response) => {
-      setCreated(true);
-      setTimeout(() => {
-        setCreated(false);
+        toast.success("Account Created Successfully");
         Navigate('/login')
-      }, 3000);
     }).catch((error) => {
-      setErrorMessage(error.response.data.message);
-      setTimeout(() => {
-        setErrorMessage(null);
-      }, 3000);
+      if (error.code === 'ERR_NETWORK') {
+        toast.error("Network Error");
+      }
+      else if (error.code == 'ERR_BAD_REQUEST') {
+        toast.error("Invalid Email or Password");
+      }
+      else {
+        toast.error("Error sending Code");
+      }
     })
     setIsButtonSpin(false);
   }
@@ -41,8 +42,6 @@ export default function Register() : JSX.Element{
   return (
     <div className='text-start py-5'>
       <div className="container">
-        {created && <div className="alert alert-success">User created successfully</div>}
-        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
         <h3>Register Now:</h3>
         <Formik
           initialValues={{

@@ -1,11 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya&family=Alegreya+Sans&family=Roboto&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 :root
 {
     --main-color:#0aad0a;
     --light-color:#f0f3f2;
     --shadow: rgba(145,158,171,.2) 0px 2px 4px -1px,rgba(145,158,171,.14) 0px 4px 5px 0px,rgba(145,158,171,.12) 0px 1px 10px 0px;
-    --font-family:'Encode Sans Expanded', sans-serif;
+    --font-family: "Rubik", sans-serif;
     --rating-color:#ffc908;
 }
 
@@ -20,11 +20,16 @@ body{
 {
     cursor: pointer;
 }
-a , a:hover{
-    color: black;
-    text-decoration: none;
+a{
+    color: #fff !important;
+    text-decoration: none !important;
+    transition: color 0.5s ease-in-out;
 }
-.product:hover
+a:hover, a:focus, a:active, .nav-link:hover
+{
+    color: #ffc908 !important;
+}
+/* .product:hover
 {
     box-shadow: var(--shadow);
     border: solid 1px var(--main-color);
@@ -34,13 +39,13 @@ a , a:hover{
     transition: transform 1s , opacity 1s;
     transform: translateY(100%);
     opacity: 0;
-}
+} 
 .product:hover .btn 
 {
     opacity: 1;
     transform: translateY(-20%);
 
-}
+} */
 .font-sm
 {
     font-size: 14px;
@@ -60,4 +65,17 @@ a , a:hover{
 p
 {
     margin: 0;
+}
+
+.bg-main-ui
+{
+    background-color: #263C97
+}
+.bg-secondary-ui
+{
+    background-color: #16BCDC
+}
+td
+{
+    vertical-align: middle !important;
 }

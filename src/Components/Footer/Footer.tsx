@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className='py-5'>
       <div className="container">
         <div className="footer-content text-start">
-          <h3>Get the FreshCart app</h3>
+          <h3 className='text-primary'>Get the Hilalymarket app</h3>
           <p>We will sent you a link open it on your phone to download the app</p>
         </div>
         <form className='mt-3'>
@@ -15,7 +15,7 @@ export default function Footer() {
               <input type="text" placeholder="Enter your phone number" className='form-control' />
             </div>
             <div className="col-md-3 mt-2 mt-md-0">
-              <button className='btn bg-main text-white w-100'>Share App Link</button>
+              <button className='btn bg-primary text-white w-100'>Share App Link</button>
             </div>
           </div>
         </form>
