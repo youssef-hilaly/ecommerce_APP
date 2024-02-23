@@ -1,9 +1,10 @@
+import './HomeBenefits.css';
 export default function HomeBenefits() {
     return (
         <div className='home-benefits pb-5'>
             <div className="row gy-2 justify-content-between">
                 <div className="col-md-3 col-6">
-                    <div className="d-flex align-items-center">
+                    <div className="d-flex align-items-center  justify-content-center">
                         <i className="fa-solid fa-truck fs-1 text-warning"></i>
                         <div className='ms-3'>
                             <p>FREE DELIVERY</p>
@@ -12,7 +13,7 @@ export default function HomeBenefits() {
                     </div>
                 </div>
                 <div className="col-md-3 col-6">
-                    <div className="d-flex">
+                    <div className="d-flex align-items-center  justify-content-center">
                         <i className="fa-solid fa-shield fs-1 text-warning"></i>
                         <div className='ms-3'>
                             <p>SAFE PAYMENT</p>
@@ -21,7 +22,7 @@ export default function HomeBenefits() {
                     </div>
                 </div>
                 <div className="col-md-3 col-6">
-                    <div className="d-flex">
+                    <div className="d-flex align-items-center  justify-content-center">
                         <i className="fa-solid fa-comments fs-1 text-warning"></i>
                         <div className='ms-3'>
                             <p>24/7 HELP CENTER</p>
@@ -30,7 +31,7 @@ export default function HomeBenefits() {
                     </div>
                 </div>
                 <div className="col-md-3 col-6">
-                    <div className="d-flex">
+                    <div className="d-flex align-items-center  justify-content-center">
                         <i className="fa-solid fa-headset fs-1 text-warning"></i>
                         <div className='ms-3'>
                             <p>FRIENDLY SERVICES</p>

@@ -32,7 +32,11 @@ export default function Payment() {
       })
 
     }else{
-      axios.post(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartID}?url=${window.location.origin}`, body, { headers: { token: token || '' } })
+      let path = window.location.href;
+      let length = path.split('/')[path.split('/').length - 1].length
+      path = path.slice(0, path.length - length)
+      console.log(path);
+      axios.post(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartID}?url=${path}`, body, { headers: { token: token || '' } })
       .then((response) => {
         toast.success("Order created successfully", { id: toastId });
         window.open(response.data.session.url, '_blank');

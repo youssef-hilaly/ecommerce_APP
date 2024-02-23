@@ -45,7 +45,7 @@ export default function Cart() {
                     <h2>Your Cart</h2>
                     <button onClick={Checkout} className="btn btn-primary">Checkout</button>
                 </div>
-                <div className="d-flex justify-content-between my-3">
+                <div className="d-flex justify-content-between flex-wrap my-3">
                     <h5>Total Items: {totalItems.toString()}</h5>
                     <h5>Total Price: {totalPrice.toString()}</h5>
                     <button onClick={_clearCart} className="btn btn-danger">Clear Cart</button>

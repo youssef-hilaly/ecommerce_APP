@@ -1,0 +1,11 @@
+@media screen and (max-width: 991px) {
+    .home-benefits p {
+        font-size: 0.7rem;
+    }
+    
+}
+@media screen and (max-width: 400px) {
+    .home-benefits p {
+         font-size: 0.6rem; 
+    }
+}

@@ -1,7 +1,6 @@
 .home-main-slider .slick-current .home-slide-animate{
     animation: slide 3s ease-in-out;
 }
-
 @keyframes slide {
     0%{
         transform: translateY(100%);
@@ -16,4 +15,17 @@
         opacity: 1;
     }
 } 
+
+@media screen and (max-width: 500px) {
+    .home-main-slider h1{
+        font-size: 1rem !important;
+    }
+    .home-main-slider p{
+        font-size: 0.7rem;
+    }
+    .home-main-slider button{
+        font-size: 0.5rem !important;
+        padding: 5px 10px !important;
+    }
+}
 

@@ -37,11 +37,11 @@ export default function Orders() {
             {data?.data.map((order: any) => (
                 <div className="card my-2">
                     <div className='card-header bg-dark'>
-                        <p className="card-title text-primary h5">Order ID: {order._id}</p>
-                        <div className='d-flex justify-content-between text-white'>
+                        <p className="card-title text-primary h5 ">Order ID: {order._id}</p>
+                        <div className='d-flex justify-content-between text-white flex-wrap'>
                             <p className="card-text h5">Total Price: {order.totalOrderPrice} $</p>
                             <p className="card-text h5">Payment Method: {order.paymentMethodType}</p>
-                            <p className="card-text h5">Delivered State: {order.isDelivered ? "Delivered" : "Not Delivered"}</p>
+                            <p className="card-text h5">Delivered State: {order.isDelivered ? "Delivered" : "Delivering"}</p>
                         </div>
                     </div>
                     <div className='card-body overflow-x-scroll'>
