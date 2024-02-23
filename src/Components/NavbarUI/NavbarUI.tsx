@@ -13,7 +13,8 @@ export default function NavbarUI() {
     const navigate = useNavigate();
 
     const { totalItems, totalPrice, setEmpty } = useContext(cartContext)
-    const { wishListIds } = useContext(wishContext)
+    const { wishListIds, clearWishList } = useContext(wishContext)
+    console.log(window.location.href)
 
     const changeCurrency = (e: any) => {
         if (e.target.value === '1') {
@@ -31,6 +32,7 @@ export default function NavbarUI() {
         setUserId(null);
         setToken(null);
         setEmpty();
+        clearWishList();
         navigate('/login');
     }
     return <>
@@ -143,7 +145,7 @@ export default function NavbarUI() {
                                     </li>
                                 }
                                 {!token && <>
-                                    {window.location.pathname === '/login' ?
+                                    {window.location.href.includes('login') ?
                                         <li className="nav-item">
                                             <Link className="nav-link mt-2" to="register">
                                                 <i className="fa-regular fa-user fs-3 me-2"></i>

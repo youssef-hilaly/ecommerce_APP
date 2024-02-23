@@ -10,6 +10,7 @@ type WishContextType = {
     getWishList: () => Promise<boolean>;
     removeFromWishList: (id: string) => Promise<boolean>;
     lazy: boolean;
+    clearWishList: () => void;
 }
 
 export const wishContext = createContext({} as WishContextType)
@@ -66,6 +67,11 @@ export default function WishContextProvider({children}: {children: React.ReactNo
         })
     }
 
+    function clearWishList() {
+        setWishList([])
+        setWishListIds([])
+    }
+
     useEffect(() => {
         extractIds()
     }, [wishList])
@@ -75,7 +81,7 @@ export default function WishContextProvider({children}: {children: React.ReactNo
     }, [token])
 
 return (
-    <wishContext.Provider value={{wishList, wishListIds, lazy, addToWishList, removeFromWishList, getWishList}}>
+    <wishContext.Provider value={{wishList, wishListIds, lazy, addToWishList, removeFromWishList, getWishList, clearWishList}}>
             {children}
     </wishContext.Provider>
 )
