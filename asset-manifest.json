@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/ecommerce_APP/static/css/main.a8e456a8.css",
+    "main.js": "/ecommerce_APP/static/js/main.d9bbf3ad.js",
+    "static/media/fa-solid-900.ttf": "/ecommerce_APP/static/media/fa-solid-900.45a265d0f07b31cde85f.ttf",
+    "static/media/fa-brands-400.ttf": "/ecommerce_APP/static/media/fa-brands-400.6205fd00fb1b573e9f0f.ttf",
+    "static/media/fa-solid-900.woff2": "/ecommerce_APP/static/media/fa-solid-900.fb8184add5a3101ad0a3.woff2",
+    "static/media/fa-brands-400.woff2": "/ecommerce_APP/static/media/fa-brands-400.8d3cabfc66809162fb4d.woff2",
+    "static/media/fa-regular-400.ttf": "/ecommerce_APP/static/media/fa-regular-400.adc51aab4d771ab65f81.ttf",
+    "static/media/homefocuse1.jpg": "/ecommerce_APP/static/media/homefocuse1.4e3abd9b1bfaac84df0b.jpg",
+    "static/media/imagesdonw3.jpg": "/ecommerce_APP/static/media/imagesdonw3.91d203e9489fdff2307a.jpg",
+    "static/media/imagesdonw2.jpg": "/ecommerce_APP/static/media/imagesdonw2.cb86c5cec365c5ab266a.jpg",
+    "static/media/fa-regular-400.woff2": "/ecommerce_APP/static/media/fa-regular-400.e931bc0d14f5bbb1da22.woff2",
+    "static/media/imagesdonw1.jpg": "/ecommerce_APP/static/media/imagesdonw1.3fe9d68764a53f36663b.jpg",
+    "static/media/homefocuse2.jpg": "/ecommerce_APP/static/media/homefocuse2.13ce649c7df3fd694f28.jpg",
+    "static/media/homefocuse3.jpg": "/ecommerce_APP/static/media/homefocuse3.519321bc38dd3e7a3e1c.jpg",
+    "static/media/fa-v4compatibility.ttf": "/ecommerce_APP/static/media/fa-v4compatibility.2eb7b3ef25042305f3ff.ttf",
+    "static/media/fa-v4compatibility.woff2": "/ecommerce_APP/static/media/fa-v4compatibility.b3049b13a93f07e026fc.woff2",
+    "static/media/slick.svg": "/ecommerce_APP/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/ecommerce_APP/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/ecommerce_APP/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/ecommerce_APP/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/ecommerce_APP/index.html",
+    "main.a8e456a8.css.map": "/ecommerce_APP/static/css/main.a8e456a8.css.map",
+    "main.d9bbf3ad.js.map": "/ecommerce_APP/static/js/main.d9bbf3ad.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a8e456a8.css",
+    "static/js/main.d9bbf3ad.js"
+  ]
+}
