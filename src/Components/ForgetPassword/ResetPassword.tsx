@@ -17,7 +17,6 @@ export default function ResetPassword() {
     let location = useLocation();
 
     if (!location.state) {
-        console.log("error in location state");
         return <Navigate to={"/forgetpassword"} />
     }
 
@@ -58,7 +57,6 @@ export default function ResetPassword() {
                                 }}
                                 validationSchema={validationSchema}
                                 onSubmit={values => {
-                                    console.log("submit", values);
                                     sendData(values);
                                 }}>
                                 <Form>

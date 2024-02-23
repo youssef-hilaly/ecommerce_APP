@@ -16,14 +16,12 @@ export default function ForgetPassword() {
     const Navigate = useNavigate();
 
     const sendData = async (values: any) => {
-        console.log(values);
         setIsButtonSpin(true);
         await axios.post('https://ecommerce.routemisr.com/api/v1/auth/forgotPasswords', values)
             .then((response) => {
                 setCodeSend(true);
                 setEmailExist(true);
                 toast.success("Code Sent");
-                console.log("navigating to resetode");
                 Navigate('/resetcode', { state: { path: '/forgetpassword' } });
             }).catch((error) => {
                 if (error.code === 'ERR_NETWORK') {

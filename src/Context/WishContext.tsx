@@ -36,7 +36,6 @@ export default function WishContextProvider({children}: {children: React.ReactNo
             return true
         })
         .catch(err => {
-            console.log(err)
             return false
         })
     }
@@ -49,7 +48,6 @@ export default function WishContextProvider({children}: {children: React.ReactNo
             return true
         })
         .catch(err => {
-            console.log(err)
             return false
         })
     }
@@ -62,7 +60,6 @@ export default function WishContextProvider({children}: {children: React.ReactNo
             return true
         })
         .catch(err => {
-            console.log(err)
             return false
         })
     }

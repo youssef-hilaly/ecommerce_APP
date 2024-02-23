@@ -64,22 +64,24 @@ export default function Cart() {
                         </thead>
                         <tbody>
                             {cartItems.map((item: any, index: number) => (
-                                <tr key={index} className='text-center' >
-                                    <td><img src={item.product.imageCover} alt="" style={{ width: "100px" }} /></td>
-                                    <td>{item.product.title.split(" ").slice(0, 4).join(" ")}</td>
-                                    <td>{item.price}</td>
-                                    <td>
-                                        <div className='d-flex justify-content-between border-1 border'>
-                                            <button className="btn border-0 border-end rounded-0" onClick={() => { updateCount(item.product._id, item.count + 1) }}>+</button>
-                                            <p className="m-2">{item.count}</p>
-                                            <button className="btn border-0 border-start rounded-0" onClick={() => {
-                                                if (item.count > 1) updateCount(item.product._id, item.count - 1)
-                                            }}>-</button>
-                                        </div>
-                                    </td>
-                                    <td>{item.price * item.count}</td>
-                                    <td><button onClick={() => deleteItem(item._id)} className="btn btn-danger">Remove</button></td>
-                                </tr>
+                                <>
+                                    <tr key={index} className='text-center' >
+                                        <td><img src={item.product.imageCover} alt="" style={{ width: "100px" }} /></td>
+                                        <td>{item.product.title.split(" ").slice(0, 4).join(" ")}</td>
+                                        <td>{item.price}</td>
+                                        <td>
+                                            <div className='d-flex justify-content-between border-1 border'>
+                                                <button className="btn border-0 border-end rounded-0" onClick={() => { updateCount(item.product._id, item.count + 1) }}>+</button>
+                                                <p className="m-2">{item.count}</p>
+                                                <button className="btn border-0 border-start rounded-0" onClick={() => {
+                                                    if (item.count > 1) updateCount(item.product._id, item.count - 1)
+                                                }}>-</button>
+                                            </div>
+                                        </td>
+                                        <td>{item.price * item.count}</td>
+                                        <td><button onClick={() => deleteItem(item.product._id)} className="btn btn-danger">Remove</button></td>
+                                    </tr>
+                                </>
                             ))}
                         </tbody>
                     </table>

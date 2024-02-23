@@ -39,7 +39,6 @@ export default function ProductCard({ product }: any) {
             navigate('/login')
             return;
         }
-        console.log("endered toggleProductToWish")
         const toastId = toast.loading("Please wait...")
         if (isWish) {
             const isOk = await removeFromWishList(id);

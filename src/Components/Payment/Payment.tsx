@@ -24,24 +24,20 @@ export default function Payment() {
     if(!isOnline){
       axios.post(`https://ecommerce.routemisr.com/api/v1/orders/${cartID}`, body, { headers: { token: token || '' } })
       .then((response) => {
-        console.log(response)
         toast.success("Order created successfully", { id: toastId });
         setEmpty();
         navigate('/allorders');
       }).catch((error) => {
-        console.log(error)
         toast.error("Error creating order", { id: toastId });
       })
 
     }else{
       axios.post(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartID}?url=${window.location.origin}`, body, { headers: { token: token || '' } })
       .then((response) => {
-        console.log(response.data.session.url)
         toast.success("Order created successfully", { id: toastId });
         window.open(response.data.session.url, '_blank');
         
       }).catch((error) => {
-        console.log(error)
         toast.error("Error creating order", { id: toastId });
       })
     }

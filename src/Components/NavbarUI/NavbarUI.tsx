@@ -14,7 +14,6 @@ export default function NavbarUI() {
 
     const { totalItems, totalPrice, setEmpty } = useContext(cartContext)
     const { wishListIds, clearWishList } = useContext(wishContext)
-    console.log(window.location.href)
 
     const changeCurrency = (e: any) => {
         if (e.target.value === '1') {

@@ -46,7 +46,6 @@ export default function CartContextProvider({ children }: { children: React.Reac
     async function getCart() {
         return await axios.get('https://ecommerce.routemisr.com/api/v1/cart', { headers: { token: token || '' } })
             .then(res => {
-                console.log("cart called");
                 setCartItems(res.data.data.products)
                 setTotalItems(res.data.numOfCartItems)
                 setTotalPrice(res.data.data.totalCartPrice)
@@ -66,7 +65,6 @@ export default function CartContextProvider({ children }: { children: React.Reac
                 return true;
             })
             .catch(err => {
-                console.log(err);
                 return false;
             });
     }
@@ -78,8 +76,8 @@ export default function CartContextProvider({ children }: { children: React.Reac
                 return true;
             })
             .catch(err => {
-                console.log(err);
-                return false;});
+                return false;
+            });
     }
 
     async function updateItemCount(id: string, count: number) {

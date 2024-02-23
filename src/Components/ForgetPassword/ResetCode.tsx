@@ -20,7 +20,6 @@ export default function ResetCode() {
 
     const sendData = async (values: any) => {
         setIsButtonSpin(true);
-        console.log(values);
         await axios.post('https://ecommerce.routemisr.com/api/v1/auth/verifyResetCode', values)
             .then((response) => {
                 _useNavigate('/resetpassword', {state: {path: '/ResetCode'}})
@@ -52,7 +51,6 @@ export default function ResetCode() {
                                 }}
                                 validationSchema={validationSchema}
                                 onSubmit={values => {
-                                    console.log("submit", values);
                                     sendData(values);
                                 }}>
                                 <Form>
