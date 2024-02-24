@@ -10,6 +10,7 @@ This is a fully functional e-commerce application built with ReactJS and TypeScr
 * **React Router:** Library for managing navigation within the app.
 * **Context API:** Provides a way to share data across the entire app without explicit prop drilling.
 * **Axios:** Promise-based HTTP client for making API calls.
+*  **Bootstrap:** a free and open-source CSS framework directed at responsive, mobile-first front-end web development.
 * **Formik:** Library for handling form validation and management.
 * **Yup:** Library for defining and validating form schemas.
 * **React Query:** Library for managing and caching data fetching.
