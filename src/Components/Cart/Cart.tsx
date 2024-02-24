@@ -64,8 +64,7 @@ export default function Cart() {
                         </thead>
                         <tbody>
                             {cartItems.map((item: any, index: number) => (
-                                <>
-                                    <tr key={index} className='text-center' >
+                                    <tr key={item.product._id} className='text-center' >
                                         <td><img src={item.product.imageCover} alt="" style={{ width: "100px" }} /></td>
                                         <td>{item.product.title.split(" ").slice(0, 4).join(" ")}</td>
                                         <td>{item.price}</td>
@@ -81,7 +80,6 @@ export default function Cart() {
                                         <td>{item.price * item.count}</td>
                                         <td><button onClick={() => deleteItem(item.product._id)} className="btn btn-danger">Remove</button></td>
                                     </tr>
-                                </>
                             ))}
                         </tbody>
                     </table>

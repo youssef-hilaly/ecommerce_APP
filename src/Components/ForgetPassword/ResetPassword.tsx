@@ -64,7 +64,7 @@ export default function ResetPassword() {
                                     <Field type="email" className="form-control" name='email' />
                                     <ErrorMessage name='email' component='div' className='alert alert-danger mt-2' />
 
-                                    <label htmlFor="newPassword" className='mt-3'>Password:</label>
+                                    <label htmlFor="newPassword" className='mt-3'>New Password:</label>
                                     <Field type="password" className="form-control" name='newPassword' />
                                     <ErrorMessage name='newPassword' component='div' className='alert alert-danger mt-2' />
 
