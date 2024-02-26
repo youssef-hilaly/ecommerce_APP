@@ -55,7 +55,6 @@ export default function WishContextProvider({ children }: { children: React.Reac
     async function getWishList() {
         return await axios.get('https://ecommerce.routemisr.com/api/v1/wishlist', { headers: { token: token } })
             .then(res => {
-                console.log("setwishlist", res.data.data)
                 setWishList(res.data.data)
                 setLazy(false)
                 return true
