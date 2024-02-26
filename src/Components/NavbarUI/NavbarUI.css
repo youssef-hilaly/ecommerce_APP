@@ -8,7 +8,7 @@
     background-color: transparent !important;
     color: white !important;
     border: none !important;
-    --bs-form-select-bg-img: url() !important;
+    --bs-form-select-bg-img: none !important;
     appearance: auto !important;
 }
 .nav-help select:focus{

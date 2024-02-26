@@ -7,11 +7,11 @@ import { cartContext } from '../../Context/CartContext';
 import { authContext } from '../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
-
 const validationSchema = Yup.object({
   city: Yup.string().required('city is required'),
   phone: Yup.string().required('Phone is required').matches(/^(01)[0125][0-9]{8}$/, 'accept only egypt phone numbers"'),
 });
+
 export default function Payment() {
 
   const { cartID, setEmpty } = useContext(cartContext)
@@ -19,31 +19,31 @@ export default function Payment() {
   const navigate = useNavigate();
 
   function sendData(body: any, isOnline: boolean) {
-    
-    const toastId = toast.loading("Please wait...")
-    if(!isOnline){
-      axios.post(`https://ecommerce.routemisr.com/api/v1/orders/${cartID}`, body, { headers: { token: token || '' } })
-      .then((response) => {
-        toast.success("Order created successfully", { id: toastId });
-        setEmpty();
-        navigate('/allorders');
-      }).catch((error) => {
-        toast.error("Error creating order", { id: toastId });
-      })
 
-    }else{
+    const toastId = toast.loading("Please wait...")
+    if (!isOnline) {
+      axios.post(`https://ecommerce.routemisr.com/api/v1/orders/${cartID}`, body, { headers: { token: token || '' } })
+        .then((response) => {
+          toast.success("Order created successfully", { id: toastId });
+          setEmpty();
+          navigate('/allorders');
+        }).catch((error) => {
+          toast.error("Error creating order", { id: toastId });
+        })
+
+    } else {
       let path = window.location.href;
       let length = path.split('/')[path.split('/').length - 1].length
       path = path.slice(0, path.length - length)
       console.log(path);
       axios.post(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartID}?url=${path}`, body, { headers: { token: token || '' } })
-      .then((response) => {
-        toast.success("Order created successfully", { id: toastId });
-        window.open(response.data.session.url, '_blank');
-        
-      }).catch((error) => {
-        toast.error("Error creating order", { id: toastId });
-      })
+        .then((response) => {
+          toast.success("Order created successfully", { id: toastId });
+          window.open(response.data.session.url, '_blank');
+
+        }).catch((error) => {
+          toast.error("Error creating order", { id: toastId });
+        })
     }
   }
   return (
@@ -60,7 +60,7 @@ export default function Payment() {
           validationSchema={validationSchema}
           onSubmit={(values) => {
             const body = {
-              shippingAddress:{
+              shippingAddress: {
                 details: values.details,
                 phone: values.phone,
                 city: values.city,

@@ -38,8 +38,6 @@ export default function Cart() {
         </div>
     )
     return (
-        // table
-        // table head: images | product name | price | quantity | total price | remove 
         <>
             <div className="container py-5">
                 <div className="d-flex justify-content-between mb-2">

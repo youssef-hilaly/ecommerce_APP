@@ -8,7 +8,6 @@ import HomeMainSlider from './HomeComponents/HomeMainSlider/HomeMainSlider'
 import ProductCard from '../ProductCard/ProductCard'
 import { IProduct } from '../../interfaces/interfaces';
 
-
 export default function Home() {
   // get products
   const { isError, isLoading, data,
@@ -21,7 +20,6 @@ export default function Home() {
   async function getAllProducts() {
     return await axios.get('https://ecommerce.routemisr.com/api/v1/products')
   }
-
 
   if (isError || isLoading) { //loading just for the first time regardless the isFetching 
     if (isError) toast.error("Error fetching data")

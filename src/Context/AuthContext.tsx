@@ -10,7 +10,7 @@ type AuthContextType = {
 export const authContext = createContext({} as AuthContextType);
 
 export default function AuthContextProvider({ children }: { children: React.ReactNode }) {
-    
+
     const [token, setToken] = useState<string | null>(null);
     const [userId, setUserId] = useState<string | null>(null);
 
@@ -29,5 +29,5 @@ export default function AuthContextProvider({ children }: { children: React.Reac
         <authContext.Provider value={{ token, setToken, userId, setUserId }}>
             {children}
         </authContext.Provider>
-  )
+    )
 }

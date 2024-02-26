@@ -1,29 +1,29 @@
 import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { cartContext } from '../../Context/CartContext'
 import toast from 'react-hot-toast'
 import { authContext } from '../../Context/AuthContext'
 import { wishContext } from '../../Context/WishContext'
 
-
 export default function ProductDetails() {
   const [isWish, setIsWish] = useState(false)
   const [activeImage, setActiveImage] = useState(0)
-  const { token } = useContext(authContext)
-  let { id } = useParams()
-  const navigate = useNavigate();
-  const { wishListIds, addToWishList, removeFromWishList } = useContext(wishContext)
-  const { isError, isLoading, data, error } = useQuery(`ProductDetails/${id}`, ProductDetails)
 
+  const { id } = useParams()
+
+  const { token } = useContext(authContext)
+  const { addToCart } = useContext(cartContext)
+  const { wishListIds, addToWishList, removeFromWishList } = useContext(wishContext)
+
+  const navigate = useNavigate();
+
+  const {isLoading, data} = useQuery(`ProductDetails/${id}`, ProductDetails)
 
   async function ProductDetails() {
     return await axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`)
   }
-
-  const { addToCart } = useContext(cartContext)
-
 
   async function addProductToCart(id: string) {
     if (!token) {
@@ -84,19 +84,19 @@ export default function ProductDetails() {
       <div className="row">
         <div className="col-md-1">
           <div className='d-flex flex-column'>
-            <div className={'border overflow-hidden my-1 ' + ((activeImage == 0) ? "border-warning" : "border-secondary")} role='button' onClick={() => handleImageClick(0)}>
+            <div className={'border overflow-hidden my-1 ' + ((activeImage === 0) ? "border-warning" : "border-secondary")} role='button' onClick={() => handleImageClick(0)}>
               <img className='w-100' style={{ transform: "scale(1.1)" }} src={data?.data.data.images[0]} alt="" />
             </div>
-            <div className={'border overflow-hidden my-1 ' + ((activeImage == 1) ? "border-warning" : "border-secondary")} role='button' onClick={() => handleImageClick(1)}>
+            <div className={'border overflow-hidden my-1 ' + ((activeImage === 1) ? "border-warning" : "border-secondary")} role='button' onClick={() => handleImageClick(1)}>
               <img className='w-100' style={{ transform: "scale(1.1)" }} src={data?.data.data.images[1]} alt="" />
             </div>
-            <div className={'border overflow-hidden my-1 ' + ((activeImage == 2) ? "border-warning" : "border-secondary")} role='button' onClick={() => handleImageClick(2)}>
+            <div className={'border overflow-hidden my-1 ' + ((activeImage === 2) ? "border-warning" : "border-secondary")} role='button' onClick={() => handleImageClick(2)}>
               <img className='w-100' style={{ transform: "scale(1.1)" }} src={data?.data.data.images[2]} alt="" />
             </div>
           </div>
         </div>
         <div className="col-md-5">
-          <img className='w-100' style={{maxHeight:"500px"}} src={data?.data.data.images[activeImage]} alt="" />
+          <img className='w-100' style={{ maxHeight: "500px" }} src={data?.data.data.images[activeImage]} alt="" />
         </div>
         <div className="col-md-6">
           <div className='h-100 p-3 d-flex flex-column justify-content-between '>

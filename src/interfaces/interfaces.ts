@@ -10,7 +10,6 @@ export interface IProduct {
     }
 }
 
-// orders interface
 export interface IOrder {
     _id: string;
     totalOrderPrice: number;
@@ -19,7 +18,6 @@ export interface IOrder {
     cartItems: Array<ICartItem>;
 }
 
-// cart items interface
 export interface ICartItem {
     product: {
         _id: string;
@@ -67,12 +65,15 @@ export interface IResetPassword {
     email: string;
     newPassword: string;
 }
+
 export interface IForgetPassword {
     email: string;
 }
+
 export interface IResetCode {
     resetCode: string;
 }
+
 export interface ISimpleSlider {
     children: React.ReactNode;
     slidesToShow: number;

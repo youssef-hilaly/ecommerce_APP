@@ -1,6 +1,5 @@
 import axios from 'axios'
-import React, { useContext, useState, createContext, useEffect  } from 'react'
-
+import React, { useContext, useState, createContext, useEffect } from 'react'
 import { authContext } from './AuthContext'
 import { IProduct } from '../interfaces/interfaces';
 
@@ -16,7 +15,7 @@ type WishContextType = {
 
 export const wishContext = createContext({} as WishContextType)
 
-export default function WishContextProvider({children}: {children: React.ReactNode}) {
+export default function WishContextProvider({ children }: { children: React.ReactNode }) {
 
     const [wishListIds, setWishListIds] = useState<string[]>([])
     const [wishList, setWishList] = useState<IProduct[]>([])
@@ -24,46 +23,46 @@ export default function WishContextProvider({children}: {children: React.ReactNo
     const [lazy, setLazy] = useState(false) // check if the wishlist is loaded or not when entering wishlist page
     const { token } = useContext(authContext)
 
-    function extractIds(){
+    function extractIds() {
         const ids = wishList.map((item: IProduct) => item.id)
         setWishListIds(ids)
     }
 
     async function addToWishList(id: string) {
-        return await axios.post('https://ecommerce.routemisr.com/api/v1/wishlist', { productId: id }, {headers: {token:token}})
-        .then(res => {
-            setWishListIds(res.data.data)
-            setLazy(true)
-            return true
-        })
-        .catch(err => {
-            return false
-        })
+        return await axios.post('https://ecommerce.routemisr.com/api/v1/wishlist', { productId: id }, { headers: { token: token } })
+            .then(res => {
+                setWishListIds(res.data.data)
+                setLazy(true)
+                return true
+            })
+            .catch(err => {
+                return false
+            })
     }
 
     async function removeFromWishList(id: string) {
-        return await axios.delete(`https://ecommerce.routemisr.com/api/v1/wishlist/${id}`,{headers: {token:token}})
-        .then(res => {
-            setWishListIds(res.data.data)
-            setLazy(true)
-            return true
-        })
-        .catch(err => {
-            return false
-        })
+        return await axios.delete(`https://ecommerce.routemisr.com/api/v1/wishlist/${id}`, { headers: { token: token } })
+            .then(res => {
+                setWishListIds(res.data.data)
+                setLazy(true)
+                return true
+            })
+            .catch(err => {
+                return false
+            })
     }
 
     async function getWishList() {
-        return await axios.get('https://ecommerce.routemisr.com/api/v1/wishlist', {headers: {token:token}})
-        .then(res => {
-            console.log("setwishlist",res.data.data)
-            setWishList(res.data.data)
-            setLazy(false)
-            return true
-        })
-        .catch(err => {
-            return false
-        })
+        return await axios.get('https://ecommerce.routemisr.com/api/v1/wishlist', { headers: { token: token } })
+            .then(res => {
+                console.log("setwishlist", res.data.data)
+                setWishList(res.data.data)
+                setLazy(false)
+                return true
+            })
+            .catch(err => {
+                return false
+            })
     }
 
     function clearWishList() {
@@ -79,9 +78,9 @@ export default function WishContextProvider({children}: {children: React.ReactNo
         getWishList()
     }, [token])
 
-return (
-    <wishContext.Provider value={{wishList, wishListIds, lazy, addToWishList, removeFromWishList, getWishList, clearWishList}}>
+    return (
+        <wishContext.Provider value={{ wishList, wishListIds, lazy, addToWishList, removeFromWishList, getWishList, clearWishList }}>
             {children}
-    </wishContext.Provider>
-)
+        </wishContext.Provider>
+    )
 }

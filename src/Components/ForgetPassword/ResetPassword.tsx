@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Formik, Form, ErrorMessage, Field } from 'formik'
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup'
 import { IResetPassword } from '../../interfaces/interfaces';
 
@@ -11,8 +11,6 @@ const validationSchema = Yup.object({
     newPassword: Yup.string().required('Password is required').min(8, 'Password must be at least 8 characters long')
         .matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/, 'Password must contain at least one letter and one number'),
 });
-
-// Reset Password interface
 
 export default function ResetPassword() {
     const [isButtonSpin, setIsButtonSpin] = useState<boolean>(false);
@@ -33,7 +31,7 @@ export default function ResetPassword() {
                 if (error.code === 'ERR_NETWORK') {
                     toast.error("Network Error");
                 }
-                else if (error.code == 'ERR_BAD_REQUEST') {
+                else if (error.code === 'ERR_BAD_REQUEST') {
                     if(error.response.data.message === "reset code not verified")
                     toast.error("reset code not verified");
                     _useNavigate('/forgetpassword')

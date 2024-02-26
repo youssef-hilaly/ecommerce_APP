@@ -6,14 +6,13 @@ import './NavbarUI.css'
 import { wishContext } from '../../Context/WishContext'
 
 export default function NavbarUI() {
-
     const [Currency, setCurrency] = useState('USD')
 
     const { token, setToken, setUserId } = useContext(authContext)
-    const navigate = useNavigate();
-
     const { totalItems, totalPrice, setEmpty } = useContext(cartContext)
     const { wishListIds, clearWishList } = useContext(wishContext)
+    
+    const navigate = useNavigate();
 
     const changeCurrency = (e: any) => {
         if (e.target.value === '1') {
@@ -34,6 +33,7 @@ export default function NavbarUI() {
         clearWishList();
         navigate('/login');
     }
+    
     return <>
         <div className="bg-main-ui">
             <div className="container">

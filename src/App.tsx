@@ -1,5 +1,5 @@
 import './App.css';
-import { RouterProvider, createBrowserRouter, createHashRouter } from 'react-router-dom';
+import { RouterProvider, createHashRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Layout from './Components/Layout/Layout';
 import Home from './Components/Home/Home';
@@ -36,7 +36,7 @@ const route = createHashRouter([
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
       { path: 'forgetpassword', element: <ForgetPassword /> },
-      { path: 'products', element: <Orders/>},
+      { path: 'products', element: <Orders /> },
       { path: 'resetcode', element: <ResetCode /> },
       { path: 'resetpassword', element: <ResetPassword /> },
       { path: '*', element: <div>Not Found</div> }

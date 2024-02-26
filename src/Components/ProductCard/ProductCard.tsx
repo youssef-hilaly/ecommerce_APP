@@ -8,10 +8,6 @@ import toast from 'react-hot-toast'
 import { authContext } from '../../Context/AuthContext'
 import { IProduct } from '../../interfaces/interfaces'
 
-
-// product interface
-
-
 export default function ProductCard({ product }: { product: IProduct }) {
     const [rating, setRating] = useState(0)
     const [isWish, setIsWish] = useState(false)
@@ -93,7 +89,7 @@ export default function ProductCard({ product }: { product: IProduct }) {
                                 {product.priceAfterDiscount ? <>
                                     <p className="card-text text-danger text-decoration-line-through">${product.price} </p>
                                     <p className="card-text">-${product.priceAfterDiscount}</p>
-                                    </>: <p className="card-text">${product.price}</p>}
+                                </> : <p className="card-text">${product.price}</p>}
                             </div>
                             {isWish ? <span className='badge bg-danger'>wishlisted</span> : null}
                         </div>

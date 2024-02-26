@@ -8,13 +8,12 @@ type cartContextType = {
     totalPrice: Number;
     cartItems: Array<ICartItem>;
     cartID: string;
-    addToCart: (id: string) =>  Promise<boolean>;
+    addToCart: (id: string) => Promise<boolean>;
     updateItemCount: (id: string, count: number) => Promise<boolean>;
     deleteFromCart: (id: string) => Promise<boolean>;
     clearCart: () => Promise<boolean>;
     setEmpty: () => void;
 };
-
 
 export const cartContext = createContext({} as cartContextType);
 
@@ -36,7 +35,7 @@ export default function CartContextProvider({ children }: { children: React.Reac
 
     async function addToCart(id: string) {
         return await axios.post('https://ecommerce.routemisr.com/api/v1/cart', { productId: id }, { headers: { token: token || '' } })
-            .then(res =>{
+            .then(res => {
                 getCart(); // to update the cart items because backend bug that doesn't return the products details
                 return true;
             })
@@ -54,11 +53,11 @@ export default function CartContextProvider({ children }: { children: React.Reac
                 setCartID(res.data.data._id);
                 return true;
             })
-            .catch(err => {return false;});
+            .catch(err => { return false; });
     }
 
     async function deleteFromCart(id: string) {
-        return await axios.delete(`https://ecommerce.routemisr.com/api/v1/cart/${id}`, { headers: { token: token || '' }})
+        return await axios.delete(`https://ecommerce.routemisr.com/api/v1/cart/${id}`, { headers: { token: token || '' } })
             .then(res => {
                 setCartItems(res.data.data.products)
                 setTotalItems(res.data.numOfCartItems)
@@ -71,8 +70,8 @@ export default function CartContextProvider({ children }: { children: React.Reac
             });
     }
 
-    async function clearCart(){
-        return await axios.delete('https://ecommerce.routemisr.com/api/v1/cart', { headers: { token: token || '' }})
+    async function clearCart() {
+        return await axios.delete('https://ecommerce.routemisr.com/api/v1/cart', { headers: { token: token || '' } })
             .then(res => {
                 setEmpty();
                 return true;
@@ -83,7 +82,7 @@ export default function CartContextProvider({ children }: { children: React.Reac
     }
 
     async function updateItemCount(id: string, count: number) {
-        return await axios.put(`https://ecommerce.routemisr.com/api/v1/cart/${id}`, { count }, { headers: { token: token || '' }})
+        return await axios.put(`https://ecommerce.routemisr.com/api/v1/cart/${id}`, { count }, { headers: { token: token || '' } })
             .then(res => {
                 setCartItems(res.data.data.products)
                 setTotalItems(res.data.numOfCartItems)
@@ -91,7 +90,7 @@ export default function CartContextProvider({ children }: { children: React.Reac
                 setCartID(res.data.data._id);
                 return true;
             })
-            .catch(err => {return false;});
+            .catch(err => { return false; });
     }
 
     useEffect(() => {
@@ -99,7 +98,7 @@ export default function CartContextProvider({ children }: { children: React.Reac
     }, [token])
 
     return (
-        <cartContext.Provider value={{totalItems, totalPrice, cartItems, cartID, setEmpty, addToCart, updateItemCount, deleteFromCart, clearCart}}>
+        <cartContext.Provider value={{ totalItems, totalPrice, cartItems, cartID, setEmpty, addToCart, updateItemCount, deleteFromCart, clearCart }}>
             {children}
         </cartContext.Provider>
     )

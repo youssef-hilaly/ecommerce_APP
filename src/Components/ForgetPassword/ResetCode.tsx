@@ -2,15 +2,13 @@ import axios from 'axios';
 import {Formik, Form, ErrorMessage, Field } from 'formik'
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate} from 'react-router-dom';
 import * as Yup from 'yup'
 import { IResetCode } from '../../interfaces/interfaces';
 
 const validationSchema = Yup.object({
     resetCode: Yup.string().required('code is required'),
 });
-
-// Reset Code interface
 
 export default function ResetCode() {
     const [isButtonSpin, setIsButtonSpin] = useState<boolean>(false);
@@ -30,7 +28,7 @@ export default function ResetCode() {
                 if (error.code === 'ERR_NETWORK') {
                     toast.error("Network Error");
                 }
-                else if (error.code == 'ERR_BAD_REQUEST') {
+                else if (error.code === 'ERR_BAD_REQUEST') {
                     toast.error("Invalid Code or Expired");
                 }
                 else {

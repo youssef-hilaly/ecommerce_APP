@@ -4,8 +4,6 @@ import { useQuery } from 'react-query'
 import axios from 'axios'
 import { ICartItem, IOrder } from '../../interfaces/interfaces'
 
-
-
 export default function Orders() {
     const { userId } = useContext(authContext)
 

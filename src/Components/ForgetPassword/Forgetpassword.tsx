@@ -10,11 +10,7 @@ const validationSchema = Yup.object({
     email: Yup.string().required('Email is required').email('Invalid email'),
 });
 
-// forget password interface
-
-
 export default function ForgetPassword() {
-    const [codeSend, setCodeSend] = useState<boolean>(false);
     const [emailExist, setEmailExist] = useState<boolean>(true);
     const [isButtonSpin, setIsButtonSpin] = useState<boolean>(false);
     const Navigate = useNavigate();
@@ -23,7 +19,6 @@ export default function ForgetPassword() {
         setIsButtonSpin(true);
         await axios.post('https://ecommerce.routemisr.com/api/v1/auth/forgotPasswords', values)
             .then((response) => {
-                setCodeSend(true);
                 setEmailExist(true);
                 toast.success("Code Sent");
                 Navigate('/resetcode', { state: { path: '/forgetpassword' } });
@@ -31,7 +26,7 @@ export default function ForgetPassword() {
                 if (error.code === 'ERR_NETWORK') {
                     toast.error("Network Error");
                 }
-                else if (error.code == 'ERR_BAD_REQUEST') {
+                else if (error.code === 'ERR_BAD_REQUEST') {
                     setEmailExist(false);
                 }
                 else {
@@ -40,7 +35,6 @@ export default function ForgetPassword() {
             })
         setIsButtonSpin(false);
     }
-
 
     return (
         <div className="container" style={{ height: "70vh" }}>
@@ -71,10 +65,6 @@ export default function ForgetPassword() {
                                     </div>
                                 </Form>
                             </Formik>
-
-
-
-
                         </div>
                     </div>
                 </div>

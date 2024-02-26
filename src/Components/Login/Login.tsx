@@ -12,8 +12,6 @@ const validationSchema = Yup.object({
   password: Yup.string().required('Password is required')
 });
 
-
-
 export default function Login() {
 
   const { setToken, setUserId } = useContext(authContext);
@@ -48,7 +46,7 @@ export default function Login() {
       if (error.code === 'ERR_NETWORK') {
         toast.error("Network Error");
       }
-      else if (error.code == 'ERR_BAD_REQUEST') {
+      else if (error.code === 'ERR_BAD_REQUEST') {
         toast.error("Invalid Email or Password");
       }
       else {

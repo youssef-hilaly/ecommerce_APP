@@ -1,10 +1,10 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { Children, cloneElement } from "react";
+import { Children } from "react";
 import { ISimpleSlider } from "../../interfaces/interfaces";
 
-export default function SimpleSlider({ children, slidesToShow, dots } : ISimpleSlider) {
+export default function SimpleSlider({ children, slidesToShow, dots }: ISimpleSlider) {
     const arrayChildren = Children.toArray(children);
     var settings = {
         dots: dots,
