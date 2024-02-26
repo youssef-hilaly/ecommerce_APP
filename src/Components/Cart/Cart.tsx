@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { cartContext } from '../../Context/CartContext';
+import { ICartItem } from '../../interfaces/interfaces';
 
 export default function Cart() {
     const { cartItems, totalItems, totalPrice, deleteFromCart, updateItemCount, clearCart } = useContext(cartContext)
@@ -63,7 +64,7 @@ export default function Cart() {
                             </tr>
                         </thead>
                         <tbody>
-                            {cartItems.map((item: any, index: number) => (
+                            {cartItems.map((item: ICartItem, index: number) => (
                                     <tr key={item.product._id} className='text-center' >
                                         <td><img src={item.product.imageCover} alt="" style={{ width: "100px" }} /></td>
                                         <td>{item.product.title.split(" ").slice(0, 4).join(" ")}</td>

@@ -4,10 +4,13 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup'
+import { IResetCode } from '../../interfaces/interfaces';
 
 const validationSchema = Yup.object({
     resetCode: Yup.string().required('code is required'),
 });
+
+// Reset Code interface
 
 export default function ResetCode() {
     const [isButtonSpin, setIsButtonSpin] = useState<boolean>(false);
@@ -18,7 +21,7 @@ export default function ResetCode() {
         return <Navigate to={"/forgetpassword"} />
     }
 
-    const sendData = async (values: any) => {
+    const sendData = async (values: IResetCode) => {
         setIsButtonSpin(true);
         await axios.post('https://ecommerce.routemisr.com/api/v1/auth/verifyResetCode', values)
             .then((response) => {

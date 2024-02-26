@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { IRegister } from '../../interfaces/interfaces';
 
 const validationSchema = Yup.object({
   name: Yup.string().required('Name is required').min(5, 'Name must be at least 5 characters long')
@@ -15,12 +16,17 @@ const validationSchema = Yup.object({
   phone: Yup.string().required('Phone is required').matches(/^(01)[0125][0-9]{8}$/, 'accept only egypt phone numbers"')
 
 });
+
+
+// Register interface
+
+
 export default function Register() : JSX.Element{
 
   const [isButtonSpin, setIsButtonSpin] = useState<boolean>(false);
   const Navigate = useNavigate();
 
-  const sendData = async(values: any) => {
+  const sendData = async(values: IRegister) => {
     setIsButtonSpin(true);
     await axios.post('https://ecommerce.routemisr.com/api/v1/auth/signup',values).then((response) => {
         toast.success("Account Created Successfully");

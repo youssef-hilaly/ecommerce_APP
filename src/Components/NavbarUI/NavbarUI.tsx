@@ -127,7 +127,7 @@ export default function NavbarUI() {
                                     <Link className="nav-link text-white" to="wishlist">
                                         <span className="position-relative">
                                             <i className="fa-regular fa-heart fs-3 me-2"></i>
-                                            {totalItems ?
+                                            {wishListIds ?
                                                 <span className="position-absolute translate-middle badge rounded-pill bg-secondary-ui" style={{ top: "-10px", right: "-20px" }}>
                                                     {wishListIds.length.toString()}
                                                 </span> : <></>}

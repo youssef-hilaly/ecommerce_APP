@@ -5,11 +5,14 @@ import { useContext, useState } from 'react';
 import * as Yup from 'yup'
 import { authContext } from '../../Context/AuthContext';
 import toast from 'react-hot-toast';
+import { Ijwtpayload, Ilogin } from '../../interfaces/interfaces';
 
 const validationSchema = Yup.object({
   email: Yup.string().required('Email is required').email('Invalid email'),
   password: Yup.string().required('Password is required')
 });
+
+
 
 export default function Login() {
 
@@ -19,7 +22,7 @@ export default function Login() {
   const Navigate = useNavigate();
 
 
-  function parseJwt(token: string): any {
+  function parseJwt(token: string): Ijwtpayload {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
@@ -28,7 +31,7 @@ export default function Login() {
     return JSON.parse(jsonPayload);
   }
 
-  const sendData = async (values: any) => {
+  const sendData = async (values: Ilogin) => {
     setIsButtonSpin(true);
     await axios.post('https://ecommerce.routemisr.com/api/v1/auth/signin', values)
     .then((response) => {

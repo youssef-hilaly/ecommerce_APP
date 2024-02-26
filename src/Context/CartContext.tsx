@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { authContext } from "./AuthContext";
 import axios from "axios";
+import { ICartItem } from "../interfaces/interfaces";
 
 type cartContextType = {
     totalItems: Number;
     totalPrice: Number;
-    cartItems: Array<any>;
+    cartItems: Array<ICartItem>;
     cartID: string;
     addToCart: (id: string) =>  Promise<boolean>;
     updateItemCount: (id: string, count: number) => Promise<boolean>;
@@ -14,13 +15,14 @@ type cartContextType = {
     setEmpty: () => void;
 };
 
+
 export const cartContext = createContext({} as cartContextType);
 
 export default function CartContextProvider({ children }: { children: React.ReactNode }) {
 
     const [totalItems, setTotalItems] = useState<Number>(0)
     const [totalPrice, setTotalPrice] = useState<Number>(0)
-    const [cartItems, setCartItems] = useState<Array<any>>([])
+    const [cartItems, setCartItems] = useState<Array<ICartItem>>([])
     const [cartID, setCartID] = useState<string>('')
 
     const { token } = useContext(authContext)

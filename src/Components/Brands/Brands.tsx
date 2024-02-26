@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useQuery } from 'react-query'
 import toast from 'react-hot-toast'
+import { IBrands } from '../../interfaces/interfaces'
 
 export default function Brands() {
     const { isError, isLoading, data } = useQuery('getBrands', getBrands)
@@ -27,7 +28,7 @@ export default function Brands() {
     return (
         <div className="container py-5">
             <div className="row g-2">
-                {data?.data.data.map((category: any) => {
+                {data?.data.data.map((category: IBrands) => {
                     return (
                         <div key={category._id} className="col-md-4">
                                 <div onClick={handleClick} className="card cursor-pointer" >

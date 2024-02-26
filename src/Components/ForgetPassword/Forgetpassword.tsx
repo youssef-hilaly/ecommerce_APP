@@ -4,10 +4,14 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup'
+import { IForgetPassword } from '../../interfaces/interfaces';
 
 const validationSchema = Yup.object({
     email: Yup.string().required('Email is required').email('Invalid email'),
 });
+
+// forget password interface
+
 
 export default function ForgetPassword() {
     const [codeSend, setCodeSend] = useState<boolean>(false);
@@ -15,7 +19,7 @@ export default function ForgetPassword() {
     const [isButtonSpin, setIsButtonSpin] = useState<boolean>(false);
     const Navigate = useNavigate();
 
-    const sendData = async (values: any) => {
+    const sendData = async (values: IForgetPassword) => {
         setIsButtonSpin(true);
         await axios.post('https://ecommerce.routemisr.com/api/v1/auth/forgotPasswords', values)
             .then((response) => {

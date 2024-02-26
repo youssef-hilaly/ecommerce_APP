@@ -4,12 +4,15 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup'
+import { IResetPassword } from '../../interfaces/interfaces';
 
 const validationSchema = Yup.object({
     email: Yup.string().required('Email is required').email('Invalid email'),
     newPassword: Yup.string().required('Password is required').min(8, 'Password must be at least 8 characters long')
         .matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/, 'Password must contain at least one letter and one number'),
 });
+
+// Reset Password interface
 
 export default function ResetPassword() {
     const [isButtonSpin, setIsButtonSpin] = useState<boolean>(false);
@@ -20,7 +23,7 @@ export default function ResetPassword() {
         return <Navigate to={"/forgetpassword"} />
     }
 
-    const sendData = async (values: any) => {
+    const sendData = async (values: IResetPassword) => {
         setIsButtonSpin(true);
         await axios.put('https://ecommerce.routemisr.com/api/v1/auth/resetPassword', values)
             .then((response) => {

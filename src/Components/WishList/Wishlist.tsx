@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { cartContext } from '../../Context/CartContext'
 import { wishContext } from '../../Context/WishContext'
+import { IProduct } from '../../interfaces/interfaces'
 
 export default function Wishlist() {
     const { lazy, wishList, getWishList, removeFromWishList } = useContext(wishContext)
@@ -57,7 +58,7 @@ export default function Wishlist() {
                             </tr>
                         </thead>
                         <tbody>
-                            {wishList.map((product: any, index: number) => (
+                            {wishList.map((product: IProduct, index: number) => (
                                 <tr key={index} className='text-center' >
                                     <td><img src={product.imageCover} alt="" style={{ width: "100px" }} /></td>
                                     <td>{product.title.split(" ").slice(0, 4).join(" ")}</td>

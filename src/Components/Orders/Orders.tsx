@@ -2,6 +2,9 @@ import React, { useContext } from 'react'
 import { authContext } from '../../Context/AuthContext'
 import { useQuery } from 'react-query'
 import axios from 'axios'
+import { ICartItem, IOrder } from '../../interfaces/interfaces'
+
+
 
 export default function Orders() {
     const { userId } = useContext(authContext)
@@ -34,7 +37,7 @@ export default function Orders() {
         <div className="container">
             <h2>Your Orders</h2>
 
-            {data?.data.map((order: any) => (
+            {data?.data.map((order: IOrder) => (
                 <div className="card my-2">
                     <div className='card-header bg-dark'>
                         <p className="card-title text-primary h5 ">Order ID: {order._id}</p>
@@ -56,8 +59,8 @@ export default function Orders() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {order.cartItems.map((item: any, index: number) => (
-                                    <tr key={index} className='text-center' >
+                                {order.cartItems.map((item: ICartItem, index: number) => (
+                                    <tr key={item.product._id} className='text-center' >
                                         <td><img src={item.product.imageCover} alt="" style={{ width: "100px" }} /></td>
                                         <td>{item.product.title.split(" ").slice(0, 4).join(" ")}</td>
                                         <td>{item.price}</td>

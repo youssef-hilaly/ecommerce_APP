@@ -6,8 +6,13 @@ import { cartContext } from '../../Context/CartContext'
 import { wishContext } from '../../Context/WishContext'
 import toast from 'react-hot-toast'
 import { authContext } from '../../Context/AuthContext'
+import { IProduct } from '../../interfaces/interfaces'
 
-export default function ProductCard({ product }: any) {
+
+// product interface
+
+
+export default function ProductCard({ product }: { product: IProduct }) {
     const [rating, setRating] = useState(0)
     const [isWish, setIsWish] = useState(false)
     const { addToCart } = useContext(cartContext)

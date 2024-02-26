@@ -2,9 +2,10 @@ import axios from 'axios'
 import React, { useContext, useState, createContext, useEffect  } from 'react'
 
 import { authContext } from './AuthContext'
+import { IProduct } from '../interfaces/interfaces';
 
 type WishContextType = {
-    wishList: any[];
+    wishList: IProduct[];
     wishListIds: string[];
     addToWishList: (id: string) => Promise<boolean>;
     getWishList: () => Promise<boolean>;
@@ -18,13 +19,13 @@ export const wishContext = createContext({} as WishContextType)
 export default function WishContextProvider({children}: {children: React.ReactNode}) {
 
     const [wishListIds, setWishListIds] = useState<string[]>([])
-    const [wishList, setWishList] = useState<any[]>([])
+    const [wishList, setWishList] = useState<IProduct[]>([])
     // false means the wishlist is loaded
     const [lazy, setLazy] = useState(false) // check if the wishlist is loaded or not when entering wishlist page
     const { token } = useContext(authContext)
 
     function extractIds(){
-        const ids = wishList.map((item: any) => item._id)
+        const ids = wishList.map((item: IProduct) => item.id)
         setWishListIds(ids)
     }
 
@@ -55,6 +56,7 @@ export default function WishContextProvider({children}: {children: React.ReactNo
     async function getWishList() {
         return await axios.get('https://ecommerce.routemisr.com/api/v1/wishlist', {headers: {token:token}})
         .then(res => {
+            console.log("setwishlist",res.data.data)
             setWishList(res.data.data)
             setLazy(false)
             return true

@@ -6,6 +6,8 @@ import HomeBenefits from './HomeComponents/HomeBenefits/HomeBenefits'
 import Top3Categories from './HomeComponents/HomeTop3Categories/Top3Categories'
 import HomeMainSlider from './HomeComponents/HomeMainSlider/HomeMainSlider'
 import ProductCard from '../ProductCard/ProductCard'
+import { IProduct } from '../../interfaces/interfaces';
+
 
 export default function Home() {
   // get products
@@ -40,7 +42,7 @@ export default function Home() {
         <Top3Categories />
         <h2>Products</h2>
         <div className="row g-3">
-          {data?.data.data.map((product: any) => {
+          {data?.data.data.map((product: IProduct) => {
             return (
               <div className=" col-md-4 col-lg-3 col-sm-6 d-flex" key={product.id}>
                 <ProductCard product={product} />

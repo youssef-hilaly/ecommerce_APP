@@ -2,6 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useQuery } from 'react-query'
 import toast from 'react-hot-toast'
+import { ICategory } from '../../interfaces/interfaces'
 
 export default function Categories() {
     const { isError, isLoading, data} = useQuery('getCategories', getCategories)
@@ -28,7 +29,7 @@ export default function Categories() {
     return (
         <div className="container py-5">
             <div className="row g-3">
-                {data?.data.data.map((category: any) => {
+                {data?.data.data.map((category: ICategory) => {
                     return (
                         <div key={category._id} className="col-md-4 col-lg-3 col-sm-6">
                                 <div onClick={handleClick} className="card cursor-pointer" >
